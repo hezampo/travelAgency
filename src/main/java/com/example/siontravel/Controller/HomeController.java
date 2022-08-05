@@ -1,6 +1,5 @@
 package com.example.siontravel.Controller;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.siontravel.Model.Entity.Areas;
-import com.example.siontravel.Model.Entity.ListaPrecios;
 import com.example.siontravel.Model.Entity.Reservas;
 import com.example.siontravel.Model.Services.AreasInterfacesServices;
 import com.example.siontravel.Model.Services.ReservasInterfacesServices;
@@ -75,17 +73,6 @@ public class HomeController {
         reservas.setFecha_creacion_reserva(new Date());
         reservas.setDiscapacidad("ninguna");
         reservas.setNota_reserva("reservas hecha desde la pagina web");
-        if(reservas.getListaPrecios().isEmpty()) {
-        	ListaPrecios precios = new ListaPrecios();
-        	List<ListaPrecios> listaprecios = new ArrayList<ListaPrecios>();
-        	precios.setNumero_reserva(numero_reserva);
-        	precios.setPrecio_adultoIda(Integer.parseInt(reservas.getId_ruta_from().getPrecio_adulto()));
-        	precios.setPrecio_adultoRegreso(Integer.parseInt(reservas.getId_ruta_to().getPrecio_adulto()));
-        	precios.setPrecio_infanteIda(Integer.parseInt(reservas.getId_ruta_from().getPrecio_infante()));
-        	precios.setPrecio_infanteRegreso(Integer.parseInt(reservas.getId_ruta_to().getPrecio_infante()));
-            listaprecios.add(precios);
-        	reservas.setListaPrecios(listaPrecios);
-        }
         model.addAttribute("reservas", reservas);
         model.addAttribute("listaPrecios", listaPrecios);
         return "/confirm";

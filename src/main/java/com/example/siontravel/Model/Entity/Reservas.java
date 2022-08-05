@@ -1,10 +1,16 @@
 package com.example.siontravel.Model.Entity;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "reservas")
@@ -52,8 +58,6 @@ public class Reservas implements Serializable {
     @OneToOne
     @JoinColumn(name = "id_bus_roundtrip")
     private Buses id_bus_roundtrip;
-    
-    private List<?> listaPrecios;
 
     public Reservas() {
     }
@@ -269,15 +273,5 @@ public class Reservas implements Serializable {
 	public void setId_ruta_from(Rutas id_ruta_from) {
 		this.id_ruta_from = id_ruta_from;
 	}
-
-
-	public List<?> getListaPrecios() {
-		return listaPrecios;
-	}
-
-	public void setListaPrecios(Map<String, Integer> listaPrecios) {
-		this.listaPrecios = (List<?>) listaPrecios;
-	}
-
     
 }
