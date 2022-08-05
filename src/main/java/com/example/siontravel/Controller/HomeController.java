@@ -60,7 +60,6 @@ public class HomeController {
         	List<?> listaTo = roundTrip(reservas.getAreas_from().getId(), reservas.getAreas_to().getId(), reservas.getFehca_llegada());
         	model.addAttribute("roundtrip", listaTo);
         }
-        
         return "/booking";
     }
 
@@ -70,11 +69,9 @@ public class HomeController {
         Map<String, Integer> listaPrecios = calculoDePrecioParaReserva(reservas);
         model.addAttribute("titulo", "Estos son los datos de su reserva con # de reserva - "+numero_reserva);
         reservas.setNumero_reserva(numero_reserva);
-        reservas.setFecha_creacion_reserva(new Date());
-        reservas.setDiscapacidad("ninguna");
-        reservas.setNota_reserva("reservas hecha desde la pagina web");
         model.addAttribute("reservas", reservas);
         model.addAttribute("listaPrecios", listaPrecios);
+        
         return "/confirm";
     }
     
@@ -120,6 +117,9 @@ public class HomeController {
     
     @PostMapping("/guardarReserva")
     public String guardarReserva(@ModelAttribute Reservas reservas){
+    	reservas.setFecha_creacion_reserva(new Date());
+        reservas.setDiscapacidad("ninguna");
+        reservas.setNota_reserva("reservas hecha desde la pagina web");
         reservasInterfacesServices.guardar(reservas);
         return "redirect:/";
     }

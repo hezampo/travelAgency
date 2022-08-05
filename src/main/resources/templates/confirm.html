@@ -119,7 +119,9 @@
 							<td colspan="3">
 								Costo totla para la reserva <i th:text="${numeroReserva}"></i>
 							</td>
-							<td th:text="${listaPrecios.precioTotal}"></td>
+							<td th:text="${listaPrecios.precioTotal}">
+							
+							</td>
 						</tr>
 						
 						<tr>
@@ -145,15 +147,14 @@
 		                <input type="hidden" th:field="*{fehca_llegada}" th:value="${reservas.fehca_llegada}">
 		                <input type="hidden" th:field="*{adulto_numero}" th:value="${reservas.adulto_numero}">
 		                <input type="hidden" th:field="*{infante_numero}" th:value="${reservas.infante_numero}">
-		                <input type="hidden" th:field="*{valor_total}" th:value="${listaPrecios}">
 						<input type="hidden" th:field="*{id_bus}" th:value="${reservas.id_bus}">
 						<input type="hidden" th:field="*{id_bus_roundtrip}" th:value="${reservas.id_bus_roundtrip}">
 						<input type="hidden" th:field="*{id_ruta_from}" th:value="${reservas.id_ruta_from}">	
 						<input type="hidden" th:field="*{id_ruta_to}" th:value="${reservas.id_ruta_to}">		
 						<input type="hidden" th:field="*{tipo_reserva}" th:value="${reservas.tipo_reserva}">
 						<input type="hidden" th:field="*{numero_reserva}" th:value="${numeroReserva}">
+					<th><input type="hidden" name="valor_total" th:value="${listaPrecios.precioTotal}"><input type="submit" value="guardar reserva" class="btn btn-success"></th >
 				
-					<th><input type="submit" value="guardar reserva" class="btn btn-success"></th >
 						</tr>
 					</thead>
 				</table>
