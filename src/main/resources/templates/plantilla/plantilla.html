@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>sionTRAVEL</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <script type="application/javascript" src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script type="application/javascript" th:src="@{/js/aplicativo.js}"></script>
+
+</head>
+<body>
+<!--INICIO BARRA DE NAVEGACION-->
+<div th:fragment="listaMenu">
+    <a th:href="@{/admin/areas/}" class="btn btn-primary">Areas</a>
+    <a th:href="@{/admin/buses/}" class="btn btn-primary">Buses</a>
+    <a th:href="@{/admin/rutas/}" class="btn btn-primary">Rutas</a>
+    <a th:href="@{/admin/reservas/}" class="btn btn-primary">Reservas</a>
+</div>
+<!--FINAL BARRA DE NAVEGACION-->
+<div class="container">
+
+</div>
+<footer th:fragment="footer">
+    <script type="application/javascript">
+        $(document).ready( function () {
+            $('#tabledata').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            });
+        } );
+    </script>
+    <script type="application/javascript" th:src="@{/js/app.js}"></script>
+    <script type="application/javascript" th:src="@{/js/angular.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/popper.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script>
+</footer>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla :: head"></head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <div th:replace="plantilla/plantilla :: listaMenu"></div>
+        </div>
+        <div class="card-body">
+          <h2 th:text="${titulo}"></h2>
+          <form th:action="@{/admin/areas/save}" class="form-inline" th:object="${areas}" method="POST">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="escribe aqui el nombre de la ciudad">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="direccion" class="form-label">Direccion</label>
+              <input type="text" class="form-control" th:field="*{direccion}" id="direccion" placeholder="escriba aqui la direccion">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="habilitado" class="form-label">Ciudad Habilitada?</label>
+              <select th:field="*{habilitado}" id="habilitado" class="form-control">
+                <option value="1" selected="selected">Habilitado</option>
+                <option value="0">Deshabilitado</option>
+              </select>
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <button type="submit" class="btn btn-primary mb-2" th:text="${btntitulo}" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>

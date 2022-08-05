@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" ng-app="aplicativo">
+<head th:replace="plantilla/plantilla :: head"></head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <div th:replace="plantilla/plantilla :: listaMenu"></div>
+        </div>
+        <div class="card-body">
+          <h2 th:text="${titulo}"></h2>
+          <form method="POST">
+            <input type="hidden">
+            <div class="row">
+              <div class="form-group">
+                <span class="form-label">Solo Ida</span>
+                <input type="radio" name="tipo_viaje" value="1">
+
+                <span class="form-label">Ida y Retorno</span>
+                <input type="radio" name="tipo_viaje" value="2">
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <span class="form-label">Ciudad de origen</span>
+                  <select id="id_from" class="form-control" onchange="areas_from()" ng-model="cadena">
+                    <option th:each="areas:${areasLista}" th:value="${areas.id}" th:text="${areas.nombre}"/>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group" ng-controller="selectDinamico">
+
+                  <span class="form-label">Ciudad de Destino</span>
+                  <select id="id_to" name="" class="form-control">
+
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <span class="form-label">Check In</span>
+                  <input class="form-control" type="date" required="">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <span class="form-label">Check out</span>
+                  <input class="form-control" type="date" required="">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <span class="form-label">Adultos</span>
+                  <input class="form-control" type="number" placeholder="Numero de adultos">
+                  <span class="select-arrow"></span>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <span class="form-label">Infante</span>
+                  <input class="form-control" type="number" placeholder="Numero de Infantes">
+
+                  <span class="select-arrow"></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-btn">
+              <button class="submit-btn btn btn-primary mt-3 mb-4">Check availability</button>
+            </div>
+            <div class="trip-result">
+              <div class="row border border-primary">
+
+                <div class="col-ms-12 col-md-2 travel-operator"><img
+                        src="/../assets/img/operadoras/brasiliaRest.png" alt="Expreso Brasilia"
+                        class="operator-logo" data-gtm-vis-first-on-screen-1714929_64="2639"
+                        data-gtm-vis-total-visible-time-1714929_64="100"
+                        data-gtm-vis-has-fired-1714929_64="1"></div>
+                <div class="col-md-2 trip-info-box text-center">
+                  <h4>Salida: 07:00 AM</h4> <span class="subtitle">Llegada: 09:15 PM</span>
+                  <span><i class="fa fa-clock-o"></i> 14h15m (Aprox.)</span>
+                </div>
+                <div class="trip-info-box col-md-2">
+                  <div class="travel-services text-center"><span data-toggle="tooltip"
+                                                                 data-placement="top" title="" class="bus-service-name"
+                                                                 data-original-title="Premium Plus">Premium Plus</span>
+                    <div class="bus-service-container"><a href="#" data-toggle="tooltip"
+                                                          data-placement="top" title="" data-original-title="Baños"><img
+                            src="/../assets/img/operadoras/servicios/bathroom.svg"></a>
+                      <a href="#" data-toggle="tooltip" data-placement="top" title=""
+                         data-original-title="Sillas Reclinables"><img
+                              src="/../assets/img/operadoras/servicios/reclining_chairs.svg"></a>
+                      <a href="#" data-toggle="tooltip" data-placement="top" title=""
+                         data-original-title="Comida/Menu"><img
+                              src="/../assets/img/operadoras/servicios/food_menu.svg"></a>
+                      <a href="#" data-toggle="tooltip" data-placement="top" title=""
+                         data-original-title="Aire Acondicionado"><img
+                              src="/../assets/img/operadoras/servicios/air_conditioner.svg"></a>
+                      <!----> <a href="#" data-toggle="tooltip" data-placement="top"
+                                 title="" data-original-title="Pantallas Individuales"><img
+                              src="/../assets/img/operadoras/servicios/individual_screen.svg"></a>
+                      <!----> <a href="#" data-toggle="tooltip" data-placement="top"
+                                 title="" data-original-title="Toma Corriente"><img
+                              src="/../assets/img/operadoras/servicios/socket_energy.svg"></a>
+                      <a href="#" data-toggle="tooltip" data-placement="top" title=""
+                         data-original-title="Wifi"><img
+                              src="/../assets/img/operadoras/servicios/wifi.svg"></a>
+                    </div>
+                  </div>
+                  <p class="small danger"><i class="fa fa-warning"></i> Quedan 10 sillas</p>
+                  <p class="small" style="display: none;">10 sillas Disponbiles</p>
+                </div>
+
+                <div class="col-md-2 trip-info-box text-center">
+                  <h4>Cartagena</h4> <span class="subtitle">Terminal de Cartagena</span> <span
+                        class="subtitle"> Pasa por TOLU</span>
+                </div>
+                <div class="col-md-2 trip-info-box text-center">
+                  <h4>Medellin</h4> <span class="subtitle">Terminal del Norte</span>
+                </div>
+                <div class="col-md-2 booking trip-price text-center">
+                  <p class="small">Desde</p>
+                  <h4 style="color: rgb(62, 181, 43);">$104,000</h4> <button
+                        class="btn btn-primary"
+                        style="border-color: rgb(255, 216, 0); background-color: rgb(255, 216, 0); color: rgb(22, 57, 127);">
+                  Seleccionar
+                </button>
+                  <!---->
+                  <p class="small">Precio x Pasajero<br><small>Cargo
+                    $2.000/Transacción</small></p>
+                </div>
+                <!--aqui-->
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>

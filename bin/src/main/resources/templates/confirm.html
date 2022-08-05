@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/plantilla :: head"></head>
+
+<body>
+	<h1 th:text="${titulo}"></h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Ciudad de Origen</th>
+							<td th:text="${reservas.areas_from.nombre}"></td>
+							<th>Ciudad de Destino</th>
+							<td th:text="${reservas.areas_to.nombre}"></td>
+						</tr>
+						<tr>
+							<th>Fecha de Salida</th>
+							<td th:text="${reservas.fecha_salida}"></td>
+							<th>Fecha de Retorno</thcolspan="2">
+							<td th:text="${reservas.fehca_llegada}"></td>
+						</tr>
+						<tr>
+							<th>Adultos</th>
+							<td th:text="${reservas.adulto_numero}"></td>
+							<th>Infantes</th>
+							<td th:text="${reservas.infante_numero}"></td>
+						</tr>
+						<tr>
+							<th colspan="4">Datos de Ida</th>
+						</tr>
+						<tr>
+							<th colspan="2"># del Bus </th>
+							<td colspan="2" th:text="${reservas.id_bus.bus}"></td>
+						</tr>
+						<tr>
+							<th colspan="2">Nombre del conductor </th>
+							<td colspan="2" th:text="${reservas.id_bus.conductor}"></td>
+						</tr>
+						<tr>
+							<th colspan="2">Compañia Operadora del Bus </th>
+							<td colspan="2" th:text="${reservas.id_bus.compania}"></td>
+						</tr>
+						<tr>
+							<th>Hora de Salida </th>
+							<td th:text="${reservas.id_bus.hora_salida}"></td>
+							<th>Hora de Llegada</th>
+							<td th:text="${reservas.id_bus.hora_llegada}"></td>
+						</tr>
+						<tr>
+							<th>Lugar de Recogida </th>
+							<td th:text="${reservas.areas_from.direccion}"></td>
+							<th>Destino</th>
+							<td th:text="${reservas.areas_to.direccion}"></td>
+						</tr>
+
+						<tr>
+							<th colspan="4">Datos de Regreso</th>
+						</tr>
+						<tr>
+							<th colspan="2"># del Bus </th>
+							<td colspan="2" th:text="${reservas.id_bus_roundtrip.bus}"></td>
+						</tr>
+						<tr>
+							<th colspan="2">Nombre del conductor </th>
+							<td colspan="2" th:text="${reservas.id_bus_roundtrip.conductor}"></td>
+						</tr>
+						<tr>
+							<th colspan="2">Compañia Operadora del Bus </th>
+							<td colspan="2" th:text="${reservas.id_bus_roundtrip.compania}"></td>
+						</tr>
+						<tr>
+							<th>Hora de Salida </th>
+							<td th:text="${reservas.id_bus_roundtrip.hora_salida}"></td>
+							<th>Hora de Llegada</th>
+							<td th:text="${reservas.id_bus_roundtrip.hora_llegada}"></td>
+						</tr>
+						<tr>
+							<th>Lugar de Recogida </th>
+							<td th:text="${reservas.areas_to.direccion}"></td>
+							<th>Destino</th>
+							<td th:text="${reservas.areas_from.direccion}"></td>
+						</tr>
+						
+						<tr>
+							<th colspan="4">Discriminación de Precios de la Reserva</th>
+						</tr>
+						<tr>
+							<th>Adultos</th>
+							<th>Precio Ida</th>
+							<th>Precio Regreso</th>
+							<th>Total</th>
+						</tr>
+						<tr>
+							<td th:text="${reservas.adulto_numero}"></td >
+							<td th:text="${reservas.id_ruta_from.precio_adulto}"></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

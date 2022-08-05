@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla :: head"></head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <div th:replace="plantilla/plantilla :: listaMenu"></div>
+        </div>
+        <div class="card-body">
+          <h2 th:text="${titulo}"></h2>
+          <form th:action="@{/admin/buses/save}" class="form-inline" th:object="${buses}" method="POST">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="id_from"  class="col-form-label">Ciudad de Origen</label>
+              <select th:field="*{areas_from}" id="id_from" class="form-control">
+                <option th:each="areas:${areasLista}" th:value="${areas.id}" th:text="${areas.nombre}"/>
+              </select>
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="id_to" class="col-form-label">Ciudad de Destino</label>
+              <select  th:field="*{areas_to}" id="id_to" class="form-control">
+                <option th:each="areas:${areasLista}" th:value="${areas.id}" th:text="${areas.nombre}"></option>
+              </select>
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="bus" class="col-form-label">Numero de Bus</label>
+              <input type="text" name="precio_adulto" th:field="*{bus}" id="bus" class="form-control">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="conductor" class="col-form-label">Nombre del Conductor</label>
+              <input type="text" th:field="*{conductor}" id="conductor" class="form-control">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="compania" class="col-form-label">Nombre de Compania</label>
+              <input type="text" th:field="*{compania}" id="compania" class="form-control">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="hora_salida" class="col-form-label">Hora de Salida</label>
+              <input type="time" th:field="*{hora_salida}" id="hora_salida" class="form-control">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="hora_llegada" class="col-form-label">Hora de Llegada</label>
+              <input type="time" th:field="*{hora_llegada}" id="hora_llegada" class="form-control">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="capacidad" class="col-form-label">Capacidad total del bus</label>
+              <input type="text" th:field="*{capacidad}" id="capacidad" class="form-control">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="habilitado" class="form-label">Bus Habilitada?</label>
+              <select th:field="*{habilitado}" id="habilitado" class="form-control">
+                <option value="1" th:selected="selected">Habilitado</option>
+                <option value="0">Deshabilitado</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2" th:text="${btntitulo}"/>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>

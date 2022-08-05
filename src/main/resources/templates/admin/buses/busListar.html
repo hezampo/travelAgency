@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="plantilla/plantilla :: head"></head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div th:replace="plantilla/plantilla :: listaMenu"></div>
+                </div>
+                <div class="card-body">
+                    <h2 th:text="${titulo}"></h2>
+                    <a th:href="@{/admin/buses/crear}" class="btn btn-primary btn-sm mb-4">Agregar un Bus</a>
+                    <table class="table table-bordered table-hover" id="tabledata">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th># Bus</th>
+                            <th>Conductor</th>
+                            <th>Compania</th>
+                            <th>Capacidad</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Hora Salida</th>
+                            <th>Hora Llegada</th>
+                            <th>Habilitado</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="buses: ${buses}">
+                            <td th:text="${buses.id}"></td>
+                            <td th:text="${buses.bus}"></td>
+                            <td th:text="${buses.conductor}"></td>
+                            <td th:text="${buses.compania}"></td>
+                            <td th:text="${buses.capacidad}"></td>
+                            <td th:text="${buses.areas_from.nombre}"></td>
+                            <td th:text="${buses.areas_to.nombre}"></td>
+                            <td th:text="${buses.hora_salida}"></td>
+                            <td th:text="${buses.hora_llegada}"></td>
+                            <td>
+                                <h6>
+                                    <span class="badge bg-secondary bg-success" th:if="${buses.habilitado == 1}">Habilitado</span>
+                                    <span class="badge bg-secondary bg-danger" th:if="${buses.habilitado == 0}">Deshabilitado</span>
+                                </h6>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" th:href="@{/admin/buses/editar/}+ *{buses.id}" th:title="Editar">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>

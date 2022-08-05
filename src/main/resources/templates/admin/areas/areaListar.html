@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla :: head"></head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div th:replace="plantilla/plantilla :: listaMenu"></div>
+                </div>
+                <div class="card-body">
+                    <h2 th:text="${titulo}"></h2>
+                    <a th:href="@{/admin/areas/crear}" class="btn btn-primary btn-sm mb-4">Agregar una Ciudad</a>
+                    <table class="table table-bordered table-hover" id="tabledata">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Direccion</th>
+                            <th>Habilitado</th>
+                            <th>Accion</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="areas:${areas}">
+                            <td th:text="${areas.id}"></td>
+                            <td th:text="${areas.nombre}"></td>
+                            <td th:text="${areas.direccion}"></td>
+                            <td>
+                                <h6>
+                                    <span class="badge bg-secondary bg-success" th:if="${areas.habilitado == 1}">Habilitado</span>
+                                    <span class="badge bg-secondary bg-danger" th:if="${areas.habilitado == 0}">Deshabilitado</span>
+                                </h6>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" th:href="@{/admin/areas/editar/}+${areas.id}" th:title="Editar">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>

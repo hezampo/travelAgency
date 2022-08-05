@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla :: head"></head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark background-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="https://www.checkmybus.co/images/checkmybus_logo.png" alt="" width="250" height="64">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active text-color-nav" aria-current="page" ref="#">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-color-nav" href="#">Nuestra Empresa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-color-nav" href="#">Nuestros servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-color-nav" href="#">Destinos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-color-nav" href="#">Contactenos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container" style="background-image: url(https://i.checkmybus.com/images/searchbackground-co.jpg);height: 200px;">
+    <div class="row">
+        <div class="col">
+            Column
+        </div>
+    </div>
+</div>
+<div class="container mt-2">
+
+    <div class="row">
+        <div class="col-3">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Ciudad de Origen</th>
+                    <td th:text="${reservas.areas_from.nombre}"></td>
+                </tr>
+                <tr>
+                    <th>Ciudad de Destino</th>
+                    <td th:text="${reservas.areas_to.nombre}"></td>
+                </tr>
+                <tr>
+                    <th>Fecha de Salida</th>
+                    <td th:text="${reservas.fecha_salida}"></td>
+                </tr>
+                <tr>
+                    <th>Fecha de Retorno</th>
+                    <td th:text="${reservas.fehca_llegada}"></td>
+                </tr>
+                <tr>
+                    <th>Adultos</th>
+                    <td th:text="${reservas.adulto_numero}"></td>
+                </tr>
+                <tr>
+                    <th>Infantes</th>
+                    <td th:text="${reservas.infante_numero}"></td>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="col-9">
+            <i>
+               viaje de <b> <font th:text="${reservas.areas_from.nombre}"></font></b> con ciudad de destino <b> <font th:text="${reservas.areas_to.nombre}"></font></b>
+            </i>
+            <form th:action="@{/confirm}" th:object="${reservas}" method="POST">
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{areas_from}" th:value="${reservas.areas_from.nombre}">
+                <input type="hidden" th:field="*{areas_to}" th:value="${reservas.areas_to.nombre}">
+                <input type="hidden" th:field="*{fecha_salida}" th:value="${reservas.fecha_salida}">
+                <input type="hidden" th:field="*{fehca_llegada}" th:value="${reservas.fehca_llegada}">
+                <input type="hidden" th:field="*{adulto_numero}" th:value="${reservas.adulto_numero}">
+                <input type="hidden" th:field="*{infante_numero}" th:value="${reservas.infante_numero}">
+				<input type="hidden" th:field="*{tipo_reserva}" th:value="${reservas.tipo_reserva}">
+
+            <div class="card mb-2" th:each="onewey:${onewaytrip}">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <input type="radio" th:field="*{id_bus}" th:value="${onewey.id_bus}" style="float: right">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Origen: <i th:text="${reservas.areas_from.nombre}"></i> <br>
+                            Direccion: <i th:text="${reservas.areas_from.direccion}"></i>
+                        </div>
+                        <div class="col">
+                            Destino: <i th:text="${reservas.areas_to.nombre}"></i> <br>
+                            Direccion: <i th:text="${reservas.areas_to.direccion}"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col punteado-top">
+                            Hora de Salida : <i th:text="${onewey.hora_salida}"></i>
+                        </div>
+                        <div class="col punteado-top">
+                            Hora de Llegada : <i th:text="${onewey.hora_llegada}"></i>
+                            <h5 style="float: right">$ <span class="badge bg-primary" th:text="${#numbers.formatDecimal(onewey.precio_adulto, 0, 'COMMA', 0, 'POINT')}"></span></h5>
+                            <input type="" name="id_ruta_from" th:value="${onewey.id_ruta}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--ROUNDTRIP-->
+                <i class="mt-4">
+                    viaje de <b> <font th:text="${reservas.areas_to.nombre}"></font></b> con ciudad de destino <b> <font th:text="${reservas.areas_from.nombre}"></font></b>
+                </i>
+                <div class="card mb-2" th:each="round:${roundtrip}">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <input type="radio" th:field="*{id_bus_roundtrip}" th:value="${round.id_bus}" style="float: right">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                Origen: <i th:text="${reservas.areas_to.nombre}"></i> <br>
+                                Direccion: <i th:text="${reservas.areas_to.direccion}"></i>
+                            </div>
+                            <div class="col">
+                                Destino: <i th:text="${reservas.areas_from.nombre}"></i> <br>
+                                Direccion: <i th:text="${reservas.areas_from.direccion}"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col punteado-top">
+                                Hora de Salida : <i th:text="${round.hora_salida}"></i>
+                            </div>
+                            <div class="col punteado-top">
+                                Hora de Llegada : <i th:text="${round.hora_llegada}"></i>
+                                <h5 style="float: right">$ <span class="badge bg-primary" th:text="${#numbers.formatDecimal(round.precio_adulto,  0, 'COMMA', 0, 'POINT')}"></span></h5>
+                                <input type="" name="id_ruta_to" th:value="${round.id_ruta}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-lg-5">
+                    <input class="btn btn-success" type="submit" value="Booking">
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<footer th:replace="plantilla/plantilla :: footer"></footer>
+</body>
+</html>
