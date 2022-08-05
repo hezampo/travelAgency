@@ -16,10 +16,9 @@ public class swaggerConfig {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.example.siontravel.Controller"))
+				.apis(RequestHandlerSelectors.basePackage("com.example.siontravel.APIREST"))
 				.paths(PathSelectors.any())
 				.build();
-			
 	}
 	
 	
