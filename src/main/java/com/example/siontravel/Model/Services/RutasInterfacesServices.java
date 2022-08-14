@@ -10,4 +10,6 @@ public interface RutasInterfacesServices {
     public Rutas buscarById(int id);
     public void eliminar(int id);
     public Rutas buscarRutaByAreas(int id);
+	public List<?> onWayTrip(int id_from, int id_to, String fecha_salida);
+	public List<?> roundTrip(int id_from, int id_to, String fecha_llegada);
 }
