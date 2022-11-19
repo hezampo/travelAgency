@@ -15,13 +15,13 @@
             <input type="hidden" th:field="*{id}">
             <div class="form-group mx-sm-3 mb-2">
               <label for="id_from"  class="col-form-label">Ciudad de Origen</label>
-              <select th:field="*{areas_from}" id="id_from" class="form-control">
+              <select th:field="*{areas_from}" id="" class="form-control">
                 <option th:each="areas:${areasLista}" th:value="${areas.id}" th:text="${areas.nombre}"/>
               </select>
             </div>
             <div class="form-group mx-sm-3 mb-2">
               <label for="id_to" class="col-form-label">Ciudad de Destino</label>
-              <select  th:field="*{areas_to}" id="id_to" class="form-control">
+              <select  th:field="*{areas_to}" id="" class="form-control">
                 <option th:each="areas:${areasLista}" th:value="${areas.id}" th:text="${areas.nombre}"></option>
               </select>
             </div>

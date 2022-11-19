@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/index :: plantilla"></head>
+<body>
+
+<div id="booking" class="section">
+    <div class="section-center">
+        <div class="container">
+            <div class="row">
+                <div class="booking-form">
+                    <form th:action="@{/booking}" th:object="${reservas}" method="POST">
+                        <div class="form-group">
+                            <div class="form-checkbox">
+                                <label for="roundtrip">
+                                    <input type="radio" id="roundtrip" th:field="*{tipo_reserva}" value="roundtrip" th:checked="checked">
+                                    <span></span>Roundtrip
+                                </label>
+                                <label for="one-way">
+                                        <input type="radio" id="one-way" th:field="*{tipo_reserva}" value="one-way">
+                                    <span></span>One way
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span class="form-label">Ciudad de Origen</span>
+                                    <select class="form-control" th:field="*{areas_from}" id="id_from">
+                                        <option value="0">Seleccione una ciudad de Origen</option>
+                                        <option th:each="areas:${areasLista}" th:value="${areas.id}" th:text="${areas.nombre}"/>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span class="form-label">Ciudad Destino</span>
+                                    <div id="resp"></div>
+                                    <select class="form-control" th:field="*{areas_to}" id="id_to">
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="form-label">Salida</span>
+                                    <input class="form-control" type="date" th:field="*{fecha_salida}" required >
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="ocultar">
+                                <div class="form-group">
+                                    <span class="form-label">Retorno</span>
+                                    <input class="form-control" type="date" th:field="*{fehca_llegada}" >
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <span class="form-label">Adultos (10+)</span>
+                                    <input type="number" class="form-control" th:field="*{adulto_numero}" id="adultos" min="1">
+                                    <span class="select-arrow"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <span class="form-label">Infantes (0-10)</span>
+                                    <input type="number" class="form-control" th:field="*{infante_numero}" id="dinfante" min="0">
+                                    <span class="select-arrow"></span>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-3">
+                                <div class="form-btn">
+                                    <input type="submit" class="submit-btn" value="Show flights">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="plantilla/index :: plantilla"></footer>
+</body>
+</html>

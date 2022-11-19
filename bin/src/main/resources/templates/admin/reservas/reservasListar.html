@@ -12,7 +12,36 @@
         <div class="card-body">
           <h2 th:text="${titulo}"></h2>
           <a class="btn btn-primary btn-sm mb-4" th:href="@{/admin/reservas/crear}">Crear una Reserva</a>
-
+			<table class="table table-bordered table-hover" id="tabledata">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Ciudad Origen</th>
+                            <th>Ciudad Destino</th>
+                            <th>Numero de Reserva</th>
+                            <th># de Adultos</th>
+                            <th># de Infantes</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="reservas : ${reservas}">
+                            <td th:text="${reservas.id}"></td>
+                            <td th:text="${reservas.nombre_reserva}"></td>
+                            <td th:text="${reservas.apellido_reserva}"></td>
+                            <td th:text="${reservas.areas_from.nombre}"></td>
+                            <td th:text="${reservas.areas_to.nombre}"></td>
+                            <td th:text="${reservas.numero_reserva}"></td>
+                            <td th:text="${reservas.adulto_numero}"></td>
+                            <td th:text="${reservas.infante_numero}"></td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
         </div>
       </div>

@@ -24,7 +24,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <span class="form-label">Ciudad de origen</span>
-                  <select id="id_from" class="form-control" onchange="areas_from()" ng-model="cadena">
+                  <select id="id_from" class="form-control" ng-model="cadena">
+                  <option value="0">Seleccione una ciudad de Origen</option>
                     <option th:each="areas:${areasLista}" th:value="${areas.id}" th:text="${areas.nombre}"/>
                   </select>
                 </div>
@@ -33,7 +34,7 @@
                 <div class="form-group" ng-controller="selectDinamico">
 
                   <span class="form-label">Ciudad de Destino</span>
-                  <select id="id_to" name="" class="form-control">
+                  <select id="id_to" name="id_to" class="form-control">
 
                   </select>
                 </div>
@@ -43,13 +44,13 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <span class="form-label">Check In</span>
-                  <input class="form-control" type="date" required="">
+                  <input class="form-control" name="fecha_salida" id="fecha_salida" type="date" required="">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <span class="form-label">Check out</span>
-                  <input class="form-control" type="date" required="">
+                  <input class="form-control" name="fecha_llegada" id="fecha_llegada" type="date" required="">
                 </div>
               </div>
             </div>
@@ -57,21 +58,21 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <span class="form-label">Adultos</span>
-                  <input class="form-control" type="number" placeholder="Numero de adultos">
+                  <input class="form-control" name="adulto" id="adulto" type="number" placeholder="Numero de adultos">
                   <span class="select-arrow"></span>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <span class="form-label">Infante</span>
-                  <input class="form-control" type="number" placeholder="Numero de Infantes">
+                  <input class="form-control" name="infante" id="infante" type="number" placeholder="Numero de Infantes">
 
                   <span class="select-arrow"></span>
                 </div>
               </div>
             </div>
             <div class="form-btn">
-              <button class="submit-btn btn btn-primary mt-3 mb-4">Check availability</button>
+              <button class="submit-btn btn btn-primary mt-3 mb-4" onclick="cargarRutas()">Check availability</button>
             </div>
             <div class="trip-result">
               <div class="row border border-primary">

@@ -16,3 +16,10 @@ $("#id_from").change(function () {
     xhr.send();
 });
 
+function cargarRutas(){
+	var id_from = $("#id_from").val();
+	var id_to = $("#id_to").val();
+	var fecha_salida = $("#fecha_salida").val();
+	var fecha_llegada = $("#fecha_llegada").val();
+}
+

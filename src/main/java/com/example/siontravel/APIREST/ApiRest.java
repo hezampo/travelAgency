@@ -21,6 +21,12 @@ public class ApiRest {
 	@Autowired
     private AreasInterfacesServices areasInterfacesServices;
 	
+	@GetMapping("/load/areas")
+	public List<?> getAreas(){
+		List<?> getAreas = areasInterfacesServices.listar();
+		return getAreas;
+	}
+	
 	@GetMapping("/load/{id}")
     public List<?> getRutaForIdArea(@PathVariable("id") int id){
         List<?> getRutaForIdArea = areasInterfacesServices.listaRutas(id);

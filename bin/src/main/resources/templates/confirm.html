@@ -4,12 +4,16 @@
 <head th:replace="plantilla/plantilla :: head"></head>
 
 <body>
-	<h1 th:text="${titulo}"></h1>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
+			 <form th:action="@{/guardarReserva}" th:object="${reservas}" method="POST">
 				<table class="table table-bordered table-hover">
 					<thead>
+						<tr>
+							<th colspan="4"><h3 th:text="${titulo}"></h3></th>
+						</tr>
 						<tr>
 							<th>Ciudad de Origen</th>
 							<td th:text="${reservas.areas_from.nombre}"></td>
@@ -95,12 +99,66 @@
 						</tr>
 						<tr>
 							<td th:text="${reservas.adulto_numero}"></td >
-							<td th:text="${reservas.id_ruta_from.precio_adulto}"></td>
-							<td></td>
-							<td></td>
+							<td th:text="${listaPrecios.precio_adultoiIda}"></td>
+							<td th:text="${listaPrecios.precio_adultoRegreso}"></td>
+							<td th:text="${listaPrecios.precioTotalAdulto}"></td>
+						</tr>
+						<tr>
+							<th>Infantes</th>
+							<th>Precio Ida</th>
+							<th>Precio Regreso</th>
+							<th>Total</th>
+						</tr>
+						<tr>
+							<td th:text="${reservas.infante_numero}"></td >
+							<td th:text="${listaPrecios.precio_infanteIda}"></td>
+							<td th:text="${listaPrecios.precio_infanteRegreso}"></td>
+							<td th:text="${listaPrecios.precioTotalInfante}"></td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								Costo totla para la reserva <i th:text="${numeroReserva}"></i>
+							</td>
+							<td th:text="${listaPrecios.precioTotal}">
+							
+							</td>
+						</tr>
+						
+						<tr>
+							<th colspan="4">Datos personales asociados a la reserva</th>
+						</tr>
+						<tr>
+							<th>Nombre</th >
+							<td><input type="text" class="form-control" name="nombre_reserva"></td>
+							<th>Apellidos</th>
+							<td><input type="text" class="form-control" name="apellido_reserva"></td>
+						</tr>
+						<tr>
+							<th>Tipo de identificacion</th >
+							<td><input type="text" class="form-control" name="documento_tipo"></td>
+							<th>Numero de identificacion</th>
+							<td><input type="text" class="form-control" name="numero_documento"></td>
+						</tr>
+						<tr>
+						<input type="hidden" th:field="*{id}">
+                		<input type="hidden" th:field="*{areas_from}" th:value="${reservas.areas_from.nombre}">
+                		<input type="hidden" th:field="*{areas_to}" th:value="${reservas.areas_to.nombre}">
+		                <input type="hidden" th:field="*{fecha_salida}" th:value="${reservas.fecha_salida}">
+		                <input type="hidden" th:field="*{fehca_llegada}" th:value="${reservas.fehca_llegada}">
+		                <input type="hidden" th:field="*{adulto_numero}" th:value="${reservas.adulto_numero}">
+		                <input type="hidden" th:field="*{infante_numero}" th:value="${reservas.infante_numero}">
+						<input type="hidden" th:field="*{id_bus}" th:value="${reservas.id_bus}">
+						<input type="hidden" th:field="*{id_bus_roundtrip}" th:value="${reservas.id_bus_roundtrip}">
+						<input type="hidden" th:field="*{id_ruta_from}" th:value="${reservas.id_ruta_from}">	
+						<input type="hidden" th:field="*{id_ruta_to}" th:value="${reservas.id_ruta_to}">		
+						<input type="hidden" th:field="*{tipo_reserva}" th:value="${reservas.tipo_reserva}">
+						<input type="hidden" th:field="*{numero_reserva}" th:value="${numeroReserva}">
+					<th><input type="hidden" name="valor_total" th:value="${listaPrecios.precioTotal}"><input type="submit" value="guardar reserva" class="btn btn-success"></th >
+				
 						</tr>
 					</thead>
 				</table>
+			 </form>
 			</div>
 		</div>
 	</div>
