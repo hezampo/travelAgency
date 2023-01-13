@@ -35,11 +35,7 @@ public class HomeController {
     
     @Autowired
     private ReservasInterfacesServices reservasInterfacesServices;
-   	
-    @Autowired
-    HttpServletRequest request; 
-
-
+   
     @GetMapping("/")
     public String index(Model model){
         List<Areas> listaAreas = areasInterfacesServices.listar();
@@ -48,6 +44,11 @@ public class HomeController {
         model.addAttribute("reservas", reservas);
         model.addAttribute("titulo", "Formulario de Booking");
         return "home";
+    }
+
+    @GetMapping("/admin")
+    public String indexAdmin(Model model){
+        return "admin/index";
     }
 	
     @PostMapping("/booking")

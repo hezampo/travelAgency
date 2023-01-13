@@ -1,6 +1,6 @@
 $("#id_from").change(function () {
     var id_ruta = $("#id_from").val();
-    const API_URL = "http://localhost:8081/v1/api/load";
+    const API_URL = "http://localhost:8080/v1/api/load";
     const xhr = new XMLHttpRequest();
     function onRequestHandler(){
         if(this.readyState == 4 && this.status == 200){
