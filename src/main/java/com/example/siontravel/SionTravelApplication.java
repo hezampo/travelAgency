@@ -9,5 +9,4 @@ public class SionTravelApplication {
     public static void main(String[] args) {
         SpringApplication.run(SionTravelApplication.class, args);
     }
-
 }

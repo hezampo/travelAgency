@@ -233,42 +233,44 @@
                             class="fas fa-download fa-sm text-white-50"></i> Generar Reportes</a>
                 </div>
                 <div class="row">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="h3 mb-0 text-gray-800" th:text="${titulo}"></h2>
-                        </div>
-                        <div class="card-body">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="h3 mb-0 text-gray-800" th:text="${titulo}"></h2>
+                            </div>
+                            <div class="card-body">
 
-                            <a th:href="@{/admin/areas/crear}" class="btn btn-primary btn-sm mb-4">Agregar una Ciudad</a>
-                            <table class="table table-bordered table-hover" id="tabledata">
-                                <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Direccion</th>
-                                    <th>Habilitado</th>
-                                    <th>Accion</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="areas:${areas}">
-                                    <td th:text="${areas.id}"></td>
-                                    <td th:text="${areas.nombre}"></td>
-                                    <td th:text="${areas.direccion}"></td>
-                                    <td>
-                                        <h6>
-                                            <span class="badge bg-secondary bg-success" th:if="${areas.habilitado == 1}" style="color: #fff">Habilitado</span>
-                                            <span class="badge bg-secondary bg-danger" th:if="${areas.habilitado == 0}" style="color: #fff">Deshabilitado</span>
-                                        </h6>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary" th:href="@{/admin/areas/editar/}+${areas.id}" th:title="Editar">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                <a th:href="@{/admin/areas/crear}" class="btn btn-primary btn-sm mb-4">Agregar una Ciudad</a>
+                                <table class="table table-bordered table-hover" id="tabledata">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Direccion</th>
+                                        <th>Habilitado</th>
+                                        <th>Accion</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="areas:${areas}">
+                                        <td th:text="${areas.id}"></td>
+                                        <td th:text="${areas.nombre}"></td>
+                                        <td th:text="${areas.direccion}"></td>
+                                        <td>
+                                            <h6>
+                                                <span class="badge bg-secondary bg-success" th:if="${areas.habilitado == 1}" style="color: #fff">Habilitado</span>
+                                                <span class="badge bg-secondary bg-danger" th:if="${areas.habilitado == 0}" style="color: #fff">Deshabilitado</span>
+                                            </h6>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" th:href="@{/admin/areas/editar/}+${areas.id}" th:title="Editar">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

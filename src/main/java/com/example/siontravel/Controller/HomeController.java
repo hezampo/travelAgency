@@ -21,6 +21,7 @@ import com.example.siontravel.Model.Entity.Reservas;
 import com.example.siontravel.Model.Services.AreasInterfacesServices;
 import com.example.siontravel.Model.Services.ReservasInterfacesServices;
 import com.example.siontravel.Util.Constantes;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
@@ -46,9 +47,9 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/admin")
+    @RequestMapping("/login")
     public String indexAdmin(Model model){
-        return "admin/index";
+        return "admin/login/login";
     }
 	
     @PostMapping("/booking")
