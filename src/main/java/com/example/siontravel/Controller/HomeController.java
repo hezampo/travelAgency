@@ -143,4 +143,24 @@ public class HomeController {
         return "admin/inicio";
     }
 
+    @GetMapping("/login")
+    public String indexLogin() {
+        return "login";
+    }
+
+    @GetMapping("/menu")
+    public String menu() {
+        return "menu";
+    }
+
+    @GetMapping("/user")
+    public String user() {
+        return "user";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+
 }
