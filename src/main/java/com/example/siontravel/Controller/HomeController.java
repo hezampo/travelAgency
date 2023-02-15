@@ -140,7 +140,7 @@ public class HomeController {
 
     @GetMapping("/admin/inicio")
     public String indexAdmin(){
-        return "admin/inicio";
+        return "redirect:/admin/areas/";
     }
 
     @GetMapping("/login")
@@ -156,11 +156,6 @@ public class HomeController {
     @GetMapping("/user")
     public String user() {
         return "user";
-    }
-
-    @GetMapping("/admin")
-    public String admin() {
-        return "admin";
     }
 
 }
