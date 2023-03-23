@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BusImplentServices implements BusInterfacesServices{
@@ -35,5 +36,11 @@ public class BusImplentServices implements BusInterfacesServices{
     @Override
     public void eliminar(int id) {
         busRepository.deleteById(id);
+    }
+
+    @Override
+    public void actualizarCapacidadBus(int totalPasajeros, int id_bus) {
+        var sql = "update busoperator.bus set capacidad = "+totalPasajeros+" where id = "+id_bus+" ";
+        jdbctemaplate.update(sql);
     }
 }

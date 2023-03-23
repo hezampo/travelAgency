@@ -110,7 +110,7 @@
                         <div class="col punteado-top">
                             Hora de Llegada : <i th:text="${onewey.hora_llegada}"></i>
                             <h5 style="float: right">$ <span class="badge bg-primary" th:text="${#numbers.formatDecimal(onewey.precio_adulto, 0, 'COMMA', 0, 'POINT')}"></span></h5>
-                            <input type="" name="id_ruta_from" th:value="${onewey.id_ruta}">
+                            <input type="hidden" name="id_ruta_from" th:value="${onewey.id_ruta}">
                         </div>
                     </div>
 
@@ -146,7 +146,7 @@
                             <div class="col punteado-top">
                                 Hora de Llegada : <i th:text="${round.hora_llegada}"></i>
                                 <h5 style="float: right">$ <span class="badge bg-primary" th:text="${#numbers.formatDecimal(round.precio_adulto,  0, 'COMMA', 0, 'POINT')}"></span></h5>
-                                <input type="" name="id_ruta_to" th:value="${round.id_ruta}">
+                                <input type="hidden" name="id_ruta_to" th:value="${round.id_ruta}">
                             </div>
                         </div>
                     </div>

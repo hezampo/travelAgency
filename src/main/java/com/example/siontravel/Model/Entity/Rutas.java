@@ -1,10 +1,17 @@
 package com.example.siontravel.Model.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "rutas")
+@Data
+@Builder @AllArgsConstructor @NoArgsConstructor
 public class Rutas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,22 +35,6 @@ public class Rutas implements Serializable {
     private String fecha_inicio;
     private String fecha_final;
     private int habilitado;
-
-    public Rutas() {
-    }
-
-    public Rutas(int id, Areas id_from, Areas id_to, Buses id_bus, String precio_adulto, String precio_infante, String precio_equipaje, String fecha_inicio, String fecha_final, int habilitado) {
-        this.id = id;
-        this.id_from = id_from;
-        this.id_to = id_to;
-        this.id_bus = id_bus;
-        this.precio_adulto = precio_adulto;
-        this.precio_infante = precio_infante;
-        this.precio_equipaje = precio_equipaje;
-        this.fecha_inicio = fecha_inicio;
-        this.fecha_final = fecha_final;
-        this.habilitado = habilitado;
-    }
 
     public int getId() {
         return id;
@@ -125,19 +116,4 @@ public class Rutas implements Serializable {
         this.habilitado = habilitado;
     }
 
-    @Override
-    public String toString() {
-        return "Rutas{" +
-                "id=" + id +
-                ", id_from=" + id_from +
-                ", id_to=" + id_to +
-                ", id_bus=" + id_bus +
-                ", precio_adulto='" + precio_adulto + '\'' +
-                ", precio_infante='" + precio_infante + '\'' +
-                ", precio_equipaje='" + precio_equipaje + '\'' +
-                ", fecha_inicio='" + fecha_inicio + '\'' +
-                ", fecha_final='" + fecha_final + '\'' +
-                ", habilitado=" + habilitado +
-                '}';
-    }
 }

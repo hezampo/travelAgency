@@ -23,7 +23,7 @@ public class ApiRest {
 	
 	@GetMapping("/load/areas")
 	public List<?> getAreas(){
-		List<?> getAreas = areasInterfacesServices.listar();
+		List<?> getAreas = areasInterfacesServices.listarAreasHabilitadas();
 		return getAreas;
 	}
 	
@@ -38,7 +38,7 @@ public class ApiRest {
         List<Rutas>listadoRutas =  rutasInterfacesServices.listar();
         return listadoRutas;
     }
-	
+	/*
 	@GetMapping("/oneway/{id_from}/{id_to}/{fecha_saldida}")
 	public List<?> oneWay(int id_from, int id_to, String fecha_salida){
 		List<?> oneway = rutasInterfacesServices.onWayTrip(id_from, id_to, fecha_salida);
@@ -50,4 +50,5 @@ public class ApiRest {
 		List<?> oneway = rutasInterfacesServices.onWayTrip(id_from, id_to, fecha_llegada);
 		return oneway;
 	}
+	*/
 }

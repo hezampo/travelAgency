@@ -10,4 +10,5 @@ public interface AreasInterfacesServices {
     public Areas buscarById(int id);
     public void eliminar(int id);
     public List<?> listaRutas (int id);
+    public List<Areas> listarAreasHabilitadas();
 }

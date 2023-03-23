@@ -16,6 +16,7 @@ public class AreasImplementServices implements AreasInterfacesServices{
     @Autowired
     private JdbcTemplate jdbcTemplate;
     List<?> rutaLista;
+    List<?> areaHabilitada;
 
     @Override
     public List<Areas> listar() {
@@ -39,9 +40,16 @@ public class AreasImplementServices implements AreasInterfacesServices{
 
     @Override
     public List<?> listaRutas(int id) {
-        var sql = "SELECT DISTINCT r.id_to, a1.nombre FROM area a LEFT JOIN rutas r ON (a.id = r.id_from) LEFT JOIN area a1 ON (r.id_to = a1.id) WHERE r.id_from ="+id;
+        var sql = "SELECT DISTINCT r.id_to, a1.nombre FROM area a LEFT JOIN rutas r ON (a.id = r.id_from) LEFT JOIN area a1 ON (r.id_to = a1.id) WHERE r.id_from ="+id+" AND a.habilitado = 1 AND  r.habilitado = 1 AND a1.habilitado = 1";
         rutaLista = this.jdbcTemplate.queryForList(sql);
         return rutaLista;
+    }
+
+    @Override
+    public List<Areas> listarAreasHabilitadas() {
+        var sql = "SELECT DISTINCT * FROM area WHERE habilitado = 1";
+        areaHabilitada = this.jdbcTemplate.queryForList(sql);
+        return (List<Areas>) areaHabilitada;
     }
 
 

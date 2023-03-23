@@ -14,30 +14,29 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     String[] resources = new String[]{
-            "/include/**","/css/**","/icons/**","/img/**","/images/**","/js/**","/layer/** ", "/static/**"
+            "/include/**","/static/**","/css/**","/icons/**","/img/**","/images/**","/js/**","/layer/** ", "/Controller/**"
     };
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers(resources).permitAll()
-                .antMatchers("/","/index").permitAll()
-                .antMatchers("/admin*").access("hasRole('ADMIN')")
-                .antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
-                .anyRequest().authenticated()
+            http
+                    .authorizeRequests()
+                    .antMatchers(resources).permitAll()
+                    .antMatchers("/","/index").permitAll()
+                    .antMatchers("/admin*").access("hasRole('ADMIN')")
+                    .antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
+                    .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .defaultSuccessUrl("/admin/inicio")
-                .failureUrl("/login?error=true")
-                .usernameParameter("username")
-                .passwordParameter("password")
+                    .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
+                    .defaultSuccessUrl("/admin/inicio")
+                    .failureUrl("/login?error=true")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
                 .and()
-                .logout()
-                .permitAll()
-                .logoutSuccessUrl("/");
+                    .logout()
+                    .permitAll()
+                    .logoutSuccessUrl("/");
     }
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Bean

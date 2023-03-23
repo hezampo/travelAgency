@@ -5,10 +5,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.example.siontravel.Model.Services.RutasInterfacesServices;
+import com.example.siontravel.Model.Entity.Buses;
+import com.example.siontravel.Model.Repository.ReservasRepository;
+import com.example.siontravel.Model.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -19,8 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.siontravel.Model.Entity.Areas;
 import com.example.siontravel.Model.Entity.Reservas;
-import com.example.siontravel.Model.Services.AreasInterfacesServices;
-import com.example.siontravel.Model.Services.ReservasInterfacesServices;
 import com.example.siontravel.Util.Constantes;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -40,10 +41,14 @@ public class HomeController {
     
     @Autowired
     private ReservasInterfacesServices reservasInterfacesServices;
+
+    @Autowired
+    private BusInterfacesServices busInterfacesServices;
+
    
     @GetMapping("/")
     public String index(Model model){
-        List<Areas> listaAreas = areasInterfacesServices.listar();
+        List<Areas> listaAreas = areasInterfacesServices.listarAreasHabilitadas();
         Reservas reservas = new Reservas();
         model.addAttribute("areasLista", listaAreas);
         model.addAttribute("reservas", reservas);
@@ -61,10 +66,11 @@ public class HomeController {
     public String booking(@ModelAttribute Reservas reservas,Model model) {
         model.addAttribute("titulo", "Lista de rutas para su fecha de viaje");
         model.addAttribute("reservas", reservas);
-        List<?> listaFrom = rutasInterfacesServices.onWayTrip(reservas.getAreas_from().getId(), reservas.getAreas_to().getId(), reservas.getFecha_salida());
+        int totalPersonasReserva = (reservas.getAdulto_numero() + reservas.getInfante_numero());
+        List<?> listaFrom = rutasInterfacesServices.onWayTrip(reservas.getAreas_from().getId(), reservas.getAreas_to().getId(), reservas.getFecha_salida(), totalPersonasReserva);
         model.addAttribute("onewaytrip", listaFrom);
         if(Constantes.ROUND_TRIP.equals(reservas.getTipo_reserva())) {
-        	List<?> listaTo = rutasInterfacesServices.roundTrip(reservas.getAreas_from().getId(), reservas.getAreas_to().getId(), reservas.getFehca_llegada());
+        	List<?> listaTo = rutasInterfacesServices.roundTrip(reservas.getAreas_from().getId(), reservas.getAreas_to().getId(), reservas.getFehca_llegada(), totalPersonasReserva);
         	model.addAttribute("roundtrip", listaTo);
         }
         return "/booking";
@@ -126,8 +132,24 @@ public class HomeController {
     	reservas.setFecha_creacion_reserva(new Date());
         reservas.setDiscapacidad("ninguna");
         reservas.setNota_reserva("reservas hecha desde la pagina web");
-        reservasInterfacesServices.guardar(reservas);
-        return "redirect:/";
+        try {
+            reservasInterfacesServices.guardar(reservas);
+            List<Reservas> reservaEncontrada = reservasInterfacesServices.obtenerReservaDesdeDB(reservas);
+            if(!reservaEncontrada.isEmpty() && reservaEncontrada.size() > 0){
+                this.descontarPasajerosdeBus((reservas.getId_bus().getCapacidad() -(reservas.getAdulto_numero() + reservas.getInfante_numero())), reservas.getId_bus());
+                if (Constantes.ROUND_TRIP.equals(reservas.getTipo_reserva())){
+                    this.descontarPasajerosdeBus((reservas.getId_bus_roundtrip().getCapacidad() - (reservas.getAdulto_numero() + reservas.getInfante_numero())), reservas.getId_bus_roundtrip());
+                }
+            }
+            return "redirect:/";
+        }catch (Exception e){
+            System.out.println("error ->"+e);
+            return null;
+        }
+    }
+
+    public void descontarPasajerosdeBus(int totalPasajeros, Buses id_bus){
+        busInterfacesServices.actualizarCapacidadBus(totalPasajeros, id_bus.getId());
     }
 
     @GetMapping({"/admin/inicio","/admin"})

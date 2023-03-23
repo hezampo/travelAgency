@@ -1,11 +1,18 @@
 package com.example.siontravel.Model.Entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "area")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Areas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,18 +23,6 @@ public class Areas implements Serializable {
     private String nombre;
     private String direccion;
     private int habilitado;
-
-    public Areas() {
-
-    }
-
-    public Areas(int id, String nombre, String direccion, int habilitado) {
-        this.id = id;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.habilitado = habilitado;
-    }
-
 
     public int getId() {
         return id;
